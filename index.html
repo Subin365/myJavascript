@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="./resources/data/empDetails.js">
+    </script>
+    <link rel="stylesheet" href="./resources/css/home.css">
+    <script>
+        var data = [];
+        window.onload = ()=>{
+            const promise = new Promise((resolve,reject)=>{
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function(){
+                if(this.readyState == 4 && this.status == 200){
+                    sessionStorage.data = this.responseText
+                    resolve(JSON.parse(this.responseText));
+                }
+            }
+            xhr.open("GET","./resources/data/data.json",true);
+            xhr.send()
+            });
+            promise.then(response =>{
+                loadGrid(response);
+            });
+        };
+        function loadGrid(data){
+            data = data;
+            var realData = [];
+            data.map(item=>{
+                item.name = item.firstName + item.lastName;
+                item.profilePic = item.gender == 'M'?'man' : 'women';
+            })
+            data.forEach((element,index)=> {
+                data.id = index;
+                realData.push(
+                `<div class="cellGrid">
+                    <img src="resources/images/${element.profilePic}.jfif"  alt="Profile Image"/>
+                    <div id = "${index}">
+                        <ul>
+                            <li data-name>Name :${element.name}</li>
+                            <li data-role>Role :${element.role}</li>
+                            <li data-skills>Skills :${element.skills}</li>
+                            <li data-email>Email :${element.email}</li>
+                            <li data-homeManager>Home Manager :${element.homeManager}</li>
+                        </ul>
+                        <div data-edit>
+                            <button  id="edit" onclick = onEdit(${data.id}) >Edit</button>
+                            <button  id="save" onclick = onSave(${data.id}) >Save</button>
+                            <button id="delete" onclick = onDelete(${data.id})>Delete</button>
+                        </div>
+                    </div>
+                </div>`
+                )
+            });
+            const dataDisplay = realData.join("");
+            document.getElementById("grids").innerHTML = dataDisplay;
+        }
+        function onDelete(id){
+            const element = event.srcElement;
+            const parent = element.parentElement.parentElement.parentElement;
+            console.log(element);
+            data = data.filter((item)=>item.id !== id);
+            document.querySelector("#grids").removeChild(parent);
+            console.log(data)
+
+            // data.forEach((element,index)=>{
+            // const button = document.querySelector(`.cellGrid:nth-child(${index+1}) [data-edit]`);
+            // button.innerHTML = `
+            //             <button  id="edit" onclick = onEdit(${index}) >Edit</button>
+            //             <button id="delete" onclick = onDelete(${index})>Delete</button>`;
+            // })
+        }
+        function onEdit(id){
+            // document.getElementById(index).innerHTML = formData;
+
+            const element = event.srcElement;
+            element.style.display = "none";
+            element.nextElementSibling.style.display = "inline-block";
+            const parent = element.parentElement.previousElementSibling;
+
+            const textbox = parent.querySelector(`[data-skills]`);
+            console.log(textbox);
+            textbox.innerHTML = `Skills : <input type = "text" id = "text" name = "text">`;
+
+            // const upForm = document.querySelector(`.cellGrid:nth-child(${index+1}) [data-skills]`);
+            // upForm.innerHTML = `Skills : <input type = "text" name = "skills" id = "txt" value = "" required />`;
+            // const button = document.querySelector(`.cellGrid:nth-child(${index+1}) [data-edit]`);
+            // button.innerHTML = `
+            //             <button  id="edit" onclick = change(${index}) type = "submit" >Save</button>
+            //             <button id="delete" onclick = onDelete(${index})>Delete</button>`;
+        } 
+        function onSave(id){
+            const element = event.srcElement;
+            element.style.display = "none";
+            element.previousElementSibling.style.display = "inline-block";
+            const parent = element.parentElement.previousElementSibling;
+            const txtBox = parent.querySelector("#text").value;
+            const push = parent.querySelector(`[data-skills]`);
+            push.innerHTML = `Skills : ${txtBox}`;
+        }
+    </script>
+    
+    <title>Document</title>
+</head>
+<body>
+    <div class="homeGrid" id="grids">
+       
+        </div>
+        <div class="homeGrid" id="grids1"></div>
+</body>
+</html>
