@@ -1,0 +1,49 @@
+.homeGrid{
+    display: grid;
+    width: 1000px;
+    margin: 0px auto;
+    min-height: 100px;
+    /* border: 1px solid black ; */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 20px;
+}
+.cellGrid{
+    width: 298px;
+    height: 298px;
+    border: 1px solid black;
+    margin:0 19px 19px 0;
+    border-radius: 10px;
+}
+.cellGrid:last-child{
+    margin-right:0px;
+}
+.cellGrid img{
+    margin: 0px auto;
+    display: block;
+    height: 90px;
+    width: auto;
+}
+.cellGrid ul{
+    list-style-type: none;
+    padding: 0px;
+    font-size: 16px;
+}
+.cellGrid .buttonLayout{
+    margin: 0px auto;
+}
+
+.cellGrid #save{
+    display: none;
+}
+img{
+    border: 1px solid black;
+}
+li{
+    border: 1px solid black;
+}
+button{
+    border-radius: 20px;
+    border-color: rgb(32, 187, 32);
+}
