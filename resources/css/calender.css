@@ -1,0 +1,44 @@
+*{
+    border-radius: 20px;
+    background-color: black;
+    color: white;
+}
+.calender{
+    margin: 0px auto;
+}
+#table{
+    margin: 0px auto;
+    border:1px dashed darkgreen;
+}
+td, th{
+    border : 1px solid green;
+    text-align: center;
+    padding: 10px;
+}
+#currentDay{
+    background-color: lawngreen;
+    border: 2px dashed black;
+}
+td:active{
+    background-color: chartreuse;
+}
+td:hover,th:hover{
+    background-color: lightseagreen;
+}
+.faded{
+    background-color: darkgray;
+}
+.button{
+    background-color: darkgreen;
+    color: lightblue;
+}
+button{
+    background-color: lightcyan;
+}
+.Day{
+    background-color: lightskyblue;
+}
+#time{
+    margin: 0px auto;
+    border:1px dashed darkgreen;
+}
