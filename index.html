@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="./resources/data/empDetails.js">
+
+
+    <!-- https://api.duckduckgo.com/?q=wikipedia&format=json&pretty=1 //we can get whatever query answers we want -->
+
     </script>
     <link rel="stylesheet" href="./resources/css/home.css">
     <script>
@@ -14,7 +17,7 @@
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function(){
                 if(this.readyState == 4 && this.status == 200){
-                    sessionStorage.data = this.responseText
+                    sessionStorage.data = this.responseText;    
                     resolve(JSON.parse(this.responseText));
                 }
             }
