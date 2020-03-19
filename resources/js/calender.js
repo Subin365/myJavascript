@@ -121,7 +121,22 @@ function pusher(){
 }
 
 function today(y,tst,t){
-    window.alert("Selected Date: " +t+"th "+" "+month[tst]+" "+y);
+    const todayPromise = new Promise((resolve,reject)=>{
+        var xhr = new XMLHttpRequest()
+        xhr.onreadystatechange = function(){
+            if(this.readyState === 4 && this.status === 200){
+                resolve(JSON.parse(this.responseText));
+        console.log("inside")
+            }
+        }
+        xhr.open("GET",`https://api.duckduckgo.com/?q=${month[tst]}&format=json&pretty=1`)
+        xhr.send()
+    })
+    todayPromise.then((response)=>{
+        let today = response.RelatedTopics[0].Text
+        console.log(today);
+    window.alert("Details of March is: " +today);
+    })
 }
 function timer(){
 setInterval( () => {
