@@ -24,6 +24,7 @@ td:active{
 }
 td:hover,th:hover{
     background-color: lightseagreen;
+    cursor: pointer;
 }
 .faded{
     background-color: darkgray;
